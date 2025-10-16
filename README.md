@@ -1,8 +1,10 @@
+<<<<<<< HEAD
 
-````markdown
-# 🚀 Laravel Ultra
+## 🚀 Laravel Ultra
+=======
+>>>>>>> e3bc892f3094cdee129844a60defd81c9983bc47
 
-> The most advanced **AI-powered UI component suite** for Laravel
+ The most advanced **AI-powered UI component suite** for Laravel
 
 ---
 
@@ -103,6 +105,5 @@ This package is open-sourced software licensed under the **[MIT License](LICENSE
 
 Built to supercharge Laravel UI development with AI-driven interactivity —
 **Laravel Ultra** brings together **AI, real-time collaboration, and multi-framework UI** into one unified toolkit.
-
-```
-
+``
+---
