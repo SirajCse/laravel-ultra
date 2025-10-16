@@ -2,16 +2,13 @@
 
 namespace LaravelUltra\Table;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
-use LaravelUltra\Table\Columns\ColumnFactory;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TableBuilder
 {
     protected $source;
     protected $columns = [];
-    protected $filters = [];
-    protected $actions = [];
     protected $config;
     protected $perPage = 25;
 
@@ -19,11 +16,6 @@ class TableBuilder
     {
         $this->source = $source;
         $this->config = $config;
-    }
-
-    public static function for($source)
-    {
-        return new static($source);
     }
 
     public function addTextColumn($key, $label = null)
@@ -44,17 +36,17 @@ class TableBuilder
         return $this;
     }
 
-    public function sortable($column = null)
+    public function sortable()
     {
-        if ($column && count($this->columns) > 0) {
+        if (count($this->columns) > 0) {
             end($this->columns)->sortable();
         }
         return $this;
     }
 
-    public function searchable($column = null)
+    public function searchable()
     {
-        if ($column && count($this->columns) > 0) {
+        if (count($this->columns) > 0) {
             end($this->columns)->searchable();
         }
         return $this;
@@ -71,77 +63,39 @@ class TableBuilder
         $data = $this->getData($request);
 
         return [
-            'data' => $data,
+            'data' => $data->items(),
             'columns' => $this->getColumnsConfig(),
             'meta' => [
-                'pagination' => $this->getPagination($data),
-                'sort' => $request->get('sort', []),
-                'filters' => $request->get('filters', []),
+                'pagination' => [
+                    'total' => $data->total(),
+                    'per_page' => $data->perPage(),
+                    'current_page' => $data->currentPage(),
+                    'last_page' => $data->lastPage(),
+                ]
             ]
         ];
     }
 
     protected function getData($request)
     {
-        if ($this->source instanceof Builder) {
-            return $this->getEloquentData($request);
-        }
+        $data = collect($this->source);
 
-        if (is_array($this->source)) {
-            return $this->getArrayData($request);
-        }
+        // Apply simple pagination
+        $page = $request->get('page', 1);
+        $perPage = $this->perPage;
+        $offset = ($page - 1) * $perPage;
 
-        return collect();
-    }
-
-    protected function getEloquentData($request)
-    {
-        $query = $this->source;
-
-        // Apply sorting
-        if ($sort = $request->get('sort')) {
-            $query->orderBy($sort['column'], $sort['direction'] ?? 'asc');
-        }
-
-        // Apply search
-        if ($search = $request->get('search')) {
-            $this->applySearch($query, $search);
-        }
-
-        return $query->paginate($this->perPage);
-    }
-
-    protected function applySearch($query, $search)
-    {
-        $searchableColumns = collect($this->columns)
-            ->filter(fn($column) => $column->isSearchable())
-            ->pluck('key');
-
-        if ($searchableColumns->isNotEmpty()) {
-            $query->where(function ($q) use ($searchableColumns, $search) {
-                foreach ($searchableColumns as $column) {
-                    $q->orWhere($column, 'like', "%{$search}%");
-                }
-            });
-        }
+        return new LengthAwarePaginator(
+            $data->slice($offset, $perPage)->values(),
+            $data->count(),
+            $perPage,
+            $page,
+            ['path' => $request->url()]
+        );
     }
 
     protected function getColumnsConfig()
     {
         return collect($this->columns)->map->toArray()->all();
-    }
-
-    protected function getPagination($data)
-    {
-        if (method_exists($data, 'total')) {
-            return [
-                'total' => $data->total(),
-                'per_page' => $data->perPage(),
-                'current_page' => $data->currentPage(),
-                'last_page' => $data->lastPage(),
-            ];
-        }
-
-        return null;
     }
 }

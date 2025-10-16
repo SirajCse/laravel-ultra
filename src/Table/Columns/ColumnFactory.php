@@ -24,6 +24,7 @@ class ColumnFactory
         return new NumberColumn($key, $label);
     }
 
+    // Add this method for boolean columns
     public static function boolean($key, $label = null)
     {
         return new BooleanColumn($key, $label);
