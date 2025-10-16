@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 
 ## 🚀 Laravel Ultra
-=======
->>>>>>> e3bc892f3094cdee129844a60defd81c9983bc47
+==========================
 
  The most advanced **AI-powered UI component suite** for Laravel
 
