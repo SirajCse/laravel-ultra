@@ -1,9 +1,7 @@
 <?php
-// src/Core/Ultra.php
 
 namespace LaravelUltra\Core;
 
-use Illuminate\Support\Facades\App;
 use LaravelUltra\Table\TableBuilder;
 use LaravelUltra\Form\FormBuilder;
 use LaravelUltra\Modal\ModalBuilder;
@@ -16,101 +14,97 @@ class Ultra
 {
     protected $app;
     protected $config;
-    protected $features = [];
+    protected $aiService;
+    protected $realtimeService;
+    protected $analyticsService;
 
     public function __construct($app)
     {
         $this->app = $app;
-        $this->config = $app['config']['ultra'];
-        $this->detectFeatures();
+        $this->config = $app['config']['ultra'] ?? [];
+
+        // Initialize services
+        $this->aiService = new AIService($this->config['ai'] ?? []);
+        $this->realtimeService = new RealtimeService($this->config['realtime'] ?? []);
+        $this->analyticsService = new AnalyticsService($this->config['analytics'] ?? []);
     }
 
+    // Table System with AI enhancement
     public function table($source = null)
     {
         $builder = new TableBuilder($source, $this->config);
 
-        // Auto-enable AI if configured
-        if ($this->config['ai']['auto_enable'] ?? true) {
-            $builder->withAISuggestions();
+        // Auto-enable AI suggestions if configured
+        if ($this->config['ai']['auto_enable'] ?? false) {
+            $builder->withAISuggestions($this->aiService);
         }
 
         return $builder;
     }
 
+    // Form System
     public function form($model = null, $data = [])
     {
-        $builder = new FormBuilder($model, $data, $this->config);
-
-        if ($this->config['ai']['auto_enable'] ?? true) {
-            $builder->withAIGeneration();
-        }
-
-        return $builder;
+        return new FormBuilder($model, $data, $this->config);
     }
 
-    public function modal($content = null, $type = 'default')
+    // Modal System
+    public function modal($content = null)
     {
-        return new ModalBuilder($content, $type, $this->config);
+        return new ModalBuilder($content, $this->config);
     }
 
+    // AI Service
     public function ai()
     {
-        return App::make(AIService::class);
+        return $this->aiService;
     }
 
+    // Real-time Service
     public function realtime()
     {
-        return App::make(RealtimeService::class);
+        return $this->realtimeService;
     }
 
+    // Analytics Service
     public function analytics()
     {
-        return App::make(AnalyticsService::class);
+        return $this->analyticsService;
     }
 
+    // Workflow System
     public function workflow($name)
     {
-        return new WorkflowBuilder($name, $this->config);
+        return new WorkflowBuilder($name);
     }
 
-    public function createComponent($type, $config = [])
+    // Component Generator
+    public function generateComponent($type, $config = [])
     {
         return match($type) {
-            'dashboard' => $this->createDashboard($config),
-            'crud' => $this->createCRUD($config),
-            'admin_panel' => $this->createAdminPanel($config),
-            'report' => $this->createReport($config),
+            'crud' => $this->generateCRUD($config),
+            'dashboard' => $this->generateDashboard($config),
+            'report' => $this->generateReport($config),
             default => throw new \Exception("Unknown component type: {$type}")
         };
     }
 
-    // AI-Powered component generation
-    public function generateWithAI($description)
+    protected function generateCRUD($config)
     {
-        return $this->ai()->generateComponent($description);
-    }
+        // AI-powered CRUD generation
+        $model = $config['model'] ?? 'User';
+        $fields = $this->aiService->generateFormFromDescription("{$model} CRUD form");
 
-    // Multi-tenant support
-    public function forTenant($tenantId)
-    {
-        config()->set('ultra.tenant_id', $tenantId);
-        return $this;
-    }
-
-    // Feature detection
-    protected function detectFeatures()
-    {
-        $this->features = [
-            'inertia' => class_exists('Inertia\Inertia'),
-            'livewire' => class_exists('Livewire\Livewire'),
-            'vue' => $this->config['frontend']['vue'] ?? true,
-            'react' => $this->config['frontend']['react'] ?? true,
-            'broadcasting' => $this->config['realtime']['enabled'] ?? false,
+        return [
+            'table' => $this->table($model)->withAISuggestions($this->aiService),
+            'form' => $this->form($model)->withAIFields($fields),
+            'modal' => $this->modal()->size('lg'),
         ];
     }
 
-    public function getDetectedFeatures()
+    // Static accessor
+    public static function __callStatic($method, $parameters)
     {
-        return $this->features;
+        return app('ultra')->{$method}(...$parameters);
     }
 }
