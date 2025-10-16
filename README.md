@@ -1,15 +1,6 @@
-<<<<<<< Updated upstream
-
-## 🚀 Laravel Ultra
-==========================
-
- The most advanced **AI-powered UI component suite** for Laravel
-=======
- 🚀 Laravel Ultra
+🚀 Laravel Ultra
 ============
-
 The most advanced **AI-powered UI component suite** for Laravel
->>>>>>> Stashed changes
 
 ---
 
