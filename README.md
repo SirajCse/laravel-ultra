@@ -1,5 +1,3 @@
-Here’s a **cleaned-up, perfectly formatted, and corrected version** of your `README.md` — ready to drop into your Laravel package root:
-
 ---
 
 ````markdown
