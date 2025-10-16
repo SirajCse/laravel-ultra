@@ -1,0 +1,58 @@
+laravel-ultra/
+├── src/
+│   ├── Core/
+│   │   ├── Ultra.php
+│   │   ├── UltraServiceProvider.php
+│   │   ├── Contracts/
+│   │   ├── Support/
+│   │   └── Traits/
+│   ├── Table/
+│   │   ├── TableBuilder.php
+│   │   ├── Columns/
+│   │   ├── Filters/
+│   │   ├── Actions/
+│   │   ├── Views/
+│   │   └── AI/
+│   ├── Form/
+│   │   ├── FormBuilder.php
+│   │   ├── Fields/
+│   │   ├── Layouts/
+│   │   ├── Validation/
+│   │   └── AI/
+│   ├── Modal/
+│   │   ├── ModalBuilder.php
+│   │   ├── Types/
+│   │   └── Manager.php
+│   ├── AI/
+│   │   ├── AIService.php
+│   │   ├── Optimizers/
+│   │   ├── Predictors/
+│   │   └── Generators/
+│   ├── Realtime/
+│   │   ├── RealtimeService.php
+│   │   ├── Collaboration/
+│   │   └── Broadcasting/
+│   ├── Analytics/
+│   │   ├── AnalyticsService.php
+│   │   ├── Trackers/
+│   │   └── Insights/
+│   └── Workflows/
+│       ├── WorkflowBuilder.php
+│       ├── Actions/
+│       └── Automations/
+├── resources/
+│   ├── views/              # Blade components
+│   ├── js/
+│   │   ├── vue/           # Vue 3 components
+│   │   ├── react/         # React components
+│   │   ├── solid/         # Solid.js components
+│   │   ├── svelte/        # Svelte components
+│   │   └── shared/        # Shared utilities
+│   └── css/
+├── config/
+├── database/
+│   ├── migrations/
+│   └── seeders/
+├── routes/
+├── tests/
+└── docs/
