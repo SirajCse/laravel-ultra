@@ -1,11 +1,7 @@
-Here’s a **cleaned-up, perfectly formatted, and corrected version** of your `README.md` — ready to drop into your Laravel package root:
 
----
+## 🚀 Laravel Ultra
 
-````markdown
-# 🚀 Laravel Ultra
-
-> The most advanced **AI-powered UI component suite** for Laravel
+ The most advanced **AI-powered UI component suite** for Laravel
 
 ---
 
@@ -106,6 +102,5 @@ This package is open-sourced software licensed under the **[MIT License](LICENSE
 
 Built to supercharge Laravel UI development with AI-driven interactivity —
 **Laravel Ultra** brings together **AI, real-time collaboration, and multi-framework UI** into one unified toolkit.
-
-```
-
+``
+---
