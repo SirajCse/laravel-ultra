@@ -1,58 +1,121 @@
 laravel-ultra/
-├── src/
-│   ├── Core/
+├── 📄 README.md
+├── 📄 composer.json
+├── 📄 package.json
+├── 📄 vite.config.js
+├── 📄 .gitignore
+├── 📄 phpunit.xml
+├── 📄 LICENSE
+
+├── 📂 src/
+│   ├── 📂 Core/
 │   │   ├── Ultra.php
 │   │   ├── UltraServiceProvider.php
-│   │   ├── Contracts/
-│   │   ├── Support/
-│   │   └── Traits/
-│   ├── Table/
+│   │   ├── 📂 Contracts/
+│   │   ├── 📂 Support/
+│   │   └── 📂 Traits/
+│   │
+│   ├── 📂 Table/
 │   │   ├── TableBuilder.php
-│   │   ├── Columns/
-│   │   ├── Filters/
-│   │   ├── Actions/
-│   │   ├── Views/
-│   │   └── AI/
-│   ├── Form/
+│   │   ├── 📂 Columns/
+│   │   ├── 📂 Filters/
+│   │   ├── 📂 Actions/
+│   │   ├── 📂 Views/
+│   │   └── 📂 AI/
+│   │
+│   ├── 📂 Form/
 │   │   ├── FormBuilder.php
-│   │   ├── Fields/
-│   │   ├── Layouts/
-│   │   ├── Validation/
-│   │   └── AI/
-│   ├── Modal/
+│   │   ├── 📂 Fields/
+│   │   ├── 📂 Layouts/
+│   │   ├── 📂 Validation/
+│   │   └── 📂 AI/
+│   │
+│   ├── 📂 Modal/
 │   │   ├── ModalBuilder.php
-│   │   ├── Types/
+│   │   ├── 📂 Types/
 │   │   └── Manager.php
-│   ├── AI/
+│   │
+│   ├── 📂 AI/
 │   │   ├── AIService.php
-│   │   ├── Optimizers/
-│   │   ├── Predictors/
-│   │   └── Generators/
-│   ├── Realtime/
+│   │   ├── 📂 Optimizers/
+│   │   ├── 📂 Predictors/
+│   │   └── 📂 Generators/
+│   │
+│   ├── 📂 Realtime/
 │   │   ├── RealtimeService.php
-│   │   ├── Collaboration/
-│   │   └── Broadcasting/
-│   ├── Analytics/
+│   │   ├── 📂 Collaboration/
+│   │   └── 📂 Broadcasting/
+│   │
+│   ├── 📂 Analytics/
 │   │   ├── AnalyticsService.php
-│   │   ├── Trackers/
-│   │   └── Insights/
-│   └── Workflows/
+│   │   ├── 📂 Trackers/
+│   │   └── 📂 Insights/
+│   │
+│   └── 📂 Workflows/
 │       ├── WorkflowBuilder.php
-│       ├── Actions/
-│       └── Automations/
-├── resources/
-│   ├── views/              # Blade components
-│   ├── js/
-│   │   ├── vue/           # Vue 3 components
-│   │   ├── react/         # React components
-│   │   ├── solid/         # Solid.js components
-│   │   ├── svelte/        # Svelte components
-│   │   └── shared/        # Shared utilities
-│   └── css/
-├── config/
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── routes/
-├── tests/
-└── docs/
+│       ├── 📂 Actions/
+│       └── 📂 Automations/
+
+├── 📂 config/
+│   └── ultra.php
+
+├── 📂 database/
+│   ├── 📂 migrations/
+│   │   ├── 2024_01_01_000000_create_ultra_tables.php
+│   │   ├── 2024_01_01_000001_create_ultra_analytics_table.php
+│   │   └── 2024_01_01_000002_create_ultra_workflows_table.php
+│   └── 📂 seeders/
+│       └── UltraSeeder.php
+
+├── 📂 routes/
+│   ├── web.php
+│   ├── api.php
+│   └── channels.php
+
+├── 📂 resources/
+│   ├── 📂 views/
+│   │   ├── 📂 components/
+│   │   │   ├── table.blade.php
+│   │   │   ├── form.blade.php
+│   │   │   └── modal.blade.php
+│   │   └── 📂 ultra/
+│   │       ├── layout.blade.php
+│   │       └── demo.blade.php
+│   │
+│   ├── 📂 js/
+│   │   ├── ultra.js
+│   │   ├── 📂 vue/          # Vue 3 components
+│   │   ├── 📂 react/        # React components
+│   │   ├── 📂 solid/        # Solid.js components
+│   │   ├── 📂 svelte/       # Svelte components
+│   │   ├── 📂 shared/       # Shared utilities
+│   │   ├── 📂 components/
+│   │   │   ├── UltraTable.vue
+│   │   │   ├── UltraForm.vue
+│   │   │   └── UltraModal.vue
+│   │   ├── 📂 composables/
+│   │   │   ├── useUltraTable.js
+│   │   │   ├── useAIAssistant.js
+│   │   │   └── useRealtime.js
+│   │   └── 📂 utils/
+│   │       └── helpers.js
+│   │
+│   └── 📂 css/
+│       ├── ultra.css
+│       └── 📂 themes/
+
+├── 📂 tests/
+│   ├── 📂 Unit/
+│   │   ├── UltraTest.php
+│   │   ├── TableBuilderTest.php
+│   │   └── FormBuilderTest.php
+│   └── 📂 Feature/
+│       ├── TableTest.php
+│       └── FormTest.php
+
+└── 📂 docs/
+    ├── introduction.md
+    ├── installation.md
+    ├── table.md
+    ├── form.md
+    └── modal.md

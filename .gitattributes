@@ -1,2 +1,11 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+/node_modules
+/public/build
+/vendor
+/.idea
+/.vscode
+.env
+.phpunit.result.cache
+coverage/
+*.log
+.DS_Store
+Thumbs.db
