@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static \LaravelUltra\Modal\ModalBuilder modal($content = null, $type = 'default')
  * @method static \LaravelUltra\AI\AIService ai()
  * @method static \LaravelUltra\Realtime\RealtimeService realtime()
- * @method static \LaravelUltra\Analytics\AnalyticsService analytics()
- * @method static \LaravelUltra\Workflows\WorkflowBuilder workflow($name)
  *
  * @see \LaravelUltra\Core\Ultra
  */

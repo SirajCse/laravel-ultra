@@ -1,90 +1,111 @@
-# 🚀 Laravel Ultra - The Most Advanced UI Component Suite
+Here’s a **cleaned-up, perfectly formatted, and corrected version** of your `README.md` — ready to drop into your Laravel package root:
 
-![Laravel Ultra](https://img.shields.io/badge/Laravel-Ultra-FF2D20?style=for-the-badge&logo=laravel)
-![Version](https://img.shields.io/github/v/release/SirajCse/laravel-ultra?style=for-the-badge)
-![License](https://img.shields.io/github/license/SirajCse/laravel-ultra?style=for-the-badge)
+---
 
-> Revolutionize your Laravel applications with AI-powered, real-time, collaborative UI components.
+````markdown
+# 🚀 Laravel Ultra
+
+> The most advanced **AI-powered UI component suite** for Laravel
+
+---
 
 ## 🌟 Features
 
-- 🤖 **AI-Powered** - Smart suggestions, auto-optimization, predictive analytics
-- 🔄 **Real-time Collaboration** - Multi-user editing, live cursors, comments
-- 🎨 **Multi-Framework** - Vue 3, React, Solid.js, Svelte, and Blade support
-- 📊 **Advanced Tables** - Multi-view (Table, Kanban, Calendar, Gantt, Timeline)
-- 📝 **Smart Forms** - AI-generated forms, real-time validation, voice input
-- 🪟 **Intelligent Modals** - Context-aware, AI-enhanced, real-time updates
-- 🥽 **VR/AR Ready** - Virtual and augmented reality interfaces
-- 🎤 **Voice Control** - Complete voice-controlled experience
-- 📈 **Built-in Analytics** - Usage tracking, performance insights, AI recommendations
+- 🤖 **AI-Powered Components** — Smart Tables, Forms, and Modals  
+- 🔄 **Real-Time Updates** — Live data synchronization  
+- 🎨 **Multi-Framework Support** — Vue, React, and Blade  
+- 📊 **Advanced Tables** — Sorting, filtering, and pagination  
+- 📝 **Smart Forms** — Auto-validation and real-time saving  
+- 🪟 **Intelligent Modals** — Context-aware dialogs  
 
-## 🚀 Quick Start
+---
 
-### Installation
+## ⚙️ Installation
+
+Install via Composer:
 
 ```bash
 composer require sirajcse/laravel-ultra
-Publish Assets
-bash
-php artisan vendor:publish --provider="LaravelUltra\Core\UltraServiceProvider"
-Basic Usage
-php
+````
+
+Then publish the configuration:
+
+```bash
+php artisan vendor:publish --provider="LaravelUltra\\Core\\UltraServiceProvider" --tag="ultra-config"
+```
+
+---
+
+## 📖 Basic Usage
+
+### 🧩 Tables
+
+```php
 use LaravelUltra\Ultra;
 
-// AI-Powered Table
 $table = Ultra::table(User::class)
-    ->withAIAssistant()
-    ->withRealtimeCollaboration()
-    ->withMultiView();
-
-return $table->toInertia(request());
-📚 Documentation
-Visit our complete documentation for detailed guides.
-
-🎯 Examples
-Advanced Table
-php
-$table = Ultra::table(Order::class)
-    ->addTextColumn('id')->sortable()->searchable()
-    ->addBadgeColumn('status')
-    ->addPriceColumn('total')
+    ->addTextColumn('name')->sortable()->searchable()
+    ->addEmailColumn('email')
     ->addDateColumn('created_at')
-    ->withRowActions()
-    ->withBulkActions()
-    ->withExport()
-    ->withAISuggestions();
-Smart Form
-php
-$form = Ultra::form(Product::class)
-    ->addText('name')->required()->aiSuggest()
-    ->addPrice('price')->min(0)
-    ->addImage('image')
-    ->addRichText('description')
-    ->withRealTimeSave()
-    ->withVoiceInput();
-🔧 Requirements
-PHP 8.1+
+    ->withPagination(15);
 
-Laravel 10+
+return $table->toResponse(request());
+```
 
-Vue 3 or React 18 (optional)
+### 📝 Forms
 
-Node.js 16+
+```php
+$form = Ultra::form(User::class)
+    ->addText('name')->required()
+    ->addEmail('email')->required()
+    ->addPassword('password')
+    ->withRealTimeValidation();
 
-🤝 Contributing
-We welcome contributions! Please see CONTRIBUTING.md for details.
+return $form->toResponse(request());
+```
 
-📄 License
-Laravel Ultra is open-sourced software licensed under the MIT license.
+### 🪟 Modals
 
-🆕 Changelog
-Please see CHANGELOG.md for more information.
+```php
+$modal = Ultra::modal()
+    ->title('Create User')
+    ->content($form)
+    ->size('lg')
+    ->withActions();
 
-<div align="center">
-Made with ❤️ by SirajCse
+return $modal->toResponse(request());
+```
 
-📖 Documentation •
-🐛 Report Bug •
-💡 Request Feature
+---
 
-</div> ```
+## 🔧 Configuration
+
+After publishing the configuration file (`config/ultra.php`), you can adjust:
+
+* 🤖 **AI Settings** — Define model preferences and behaviors
+* 🔄 **Realtime Features** — Enable live collaboration and syncing
+* 🎨 **Frontend Framework** — Choose Vue, React, or Blade
+* ⚙️ **Default Behaviors** — Customize pagination, validation, and caching
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Please see the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for details.
+
+---
+
+## 📄 License
+
+This package is open-sourced software licensed under the **[MIT License](LICENSE)**.
+
+---
+
+### 💡 Inspiration
+
+Built to supercharge Laravel UI development with AI-driven interactivity —
+**Laravel Ultra** brings together **AI, real-time collaboration, and multi-framework UI** into one unified toolkit.
+
+```
+

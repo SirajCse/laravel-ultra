@@ -3,7 +3,6 @@
 namespace LaravelUltra\Core\Console;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
 {
@@ -21,12 +20,6 @@ class InstallCommand extends Command
         // Publish config
         $this->call('vendor:publish', ['--tag' => 'ultra-config']);
 
-        // Publish migrations
-        $this->call('vendor:publish', ['--tag' => 'ultra-migrations']);
-
-        // Run migrations
-        $this->call('migrate');
-
         if ($this->option('ai')) {
             $this->installAIFeatures();
         }
@@ -40,7 +33,7 @@ class InstallCommand extends Command
         }
 
         $this->info('🎉 Laravel Ultra installed successfully!');
-        $this->info('💡 Run "php artisan ultra:demo" to see examples.');
+        $this->info('💡 Usage: Ultra::table(User::class)->toResponse(request())');
     }
 
     protected function installAIFeatures()
@@ -71,10 +64,8 @@ class InstallCommand extends Command
     {
         $this->info('📦 Installing demo components...');
 
-        $this->call('vendor:publish', ['--tag' => 'ultra-views']);
         $this->call('vendor:publish', ['--tag' => 'ultra-assets']);
 
         $this->info('✅ Demo components installed');
-        $this->info('🌐 Visit /ultra-demo to see examples');
     }
 }
