@@ -11,16 +11,39 @@ laravel-ultra/
 │   ├── 📂 Core/
 │   │   ├── Ultra.php
 │   │   ├── UltraServiceProvider.php
+│   │   ├── UltraFacade.php
 │   │   ├── 📂 Contracts/
 │   │   ├── 📂 Support/
 │   │   └── 📂 Traits/
 │   │
 │   ├── 📂 Table/
 │   │   ├── TableBuilder.php
+│   │   ├── EloquentTableBuilder.php          # NEW
 │   │   ├── 📂 Columns/
+│   │   │   ├── Column.php
+│   │   │   ├── ColumnFactory.php
+│   │   │   ├── TextColumn.php
+│   │   │   ├── ImageColumn.php               # NEW
+│   │   │   ├── IconColumn.php                # NEW
+│   │   │   ├── BooleanColumn.php
+│   │   │   └── ...
 │   │   ├── 📂 Filters/
+│   │   │   ├── Filter.php
+│   │   │   ├── SelectFilter.php
+│   │   │   ├── DateFilter.php                # NEW
+│   │   │   ├── TextFilter.php                # NEW
+│   │   │   └── ...
 │   │   ├── 📂 Actions/
+│   │   │   ├── Action.php
+│   │   │   ├── RowAction.php                 # NEW
+│   │   │   ├── BulkAction.php                # NEW
+│   │   │   ├── EditAction.php
+│   │   │   ├── DeleteAction.php              # NEW
+│   │   │   └── ...
 │   │   ├── 📂 Views/
+│   │   │   ├── TableView.php                 # NEW
+│   │   │   ├── ViewManager.php               # NEW
+│   │   │   └── ...
 │   │   └── 📂 AI/
 │   │
 │   ├── 📂 Form/
@@ -32,7 +55,13 @@ laravel-ultra/
 │   │
 │   ├── 📂 Modal/
 │   │   ├── ModalBuilder.php
+│   │   ├── AdvancedModalBuilder.php          # NEW
+│   │   ├── ModalManager.php                  # NEW
 │   │   ├── 📂 Types/
+│   │   │   ├── SimpleModal.php               # NEW
+│   │   │   ├── FormModal.php                 # NEW
+│   │   │   ├── ConfirmModal.php              # NEW
+│   │   │   └── ...
 │   │   └── Manager.php
 │   │
 │   ├── 📂 AI/
@@ -63,7 +92,8 @@ laravel-ultra/
 │   ├── 📂 migrations/
 │   │   ├── 2024_01_01_000000_create_ultra_tables.php
 │   │   ├── 2024_01_01_000001_create_ultra_analytics_table.php
-│   │   └── 2024_01_01_000002_create_ultra_workflows_table.php
+│   │   ├── 2024_01_01_000002_create_ultra_workflows_table.php
+│   │   └── 2024_01_01_000003_create_ultra_views_table.php      # NEW
 │   └── 📂 seeders/
 │       └── UltraSeeder.php
 
@@ -84,21 +114,32 @@ laravel-ultra/
 │   │
 │   ├── 📂 js/
 │   │   ├── ultra.js
-│   │   ├── 📂 vue/          # Vue 3 components
-│   │   ├── 📂 react/        # React components
-│   │   ├── 📂 solid/        # Solid.js components
-│   │   ├── 📂 svelte/       # Svelte components
-│   │   ├── 📂 shared/       # Shared utilities
-│   │   ├── 📂 components/
-│   │   │   ├── UltraTable.vue
+│   │   ├── 📂 vue/
+│   │   │   ├── UltraTable.vue                 # UPDATED
 │   │   │   ├── UltraForm.vue
-│   │   │   └── UltraModal.vue
+│   │   │   ├── UltraModal.vue                 # UPDATED
+│   │   │   ├── 📂 cells/
+│   │   │   │   ├── TextCell.vue
+│   │   │   │   ├── ImageCell.vue              # NEW
+│   │   │   │   ├── IconCell.vue               # NEW
+│   │   │   │   ├── DateCell.vue
+│   │   │   │   └── BooleanCell.vue
+│   │   │   ├── 📂 filters/
+│   │   │   │   ├── SelectFilter.vue           # NEW
+│   │   │   │   ├── DateFilter.vue             # NEW
+│   │   │   │   └── TextFilter.vue             # NEW
+│   │   │   └── 📂 modals/
+│   │   │       ├── BaseModal.vue              # NEW
+│   │   │       ├── SimpleModal.vue            # NEW
+│   │   │       ├── FormModal.vue              # NEW
+│   │   │       └── ...
+│   │   ├── 📂 react/
+│   │   ├── 📂 solid/
+│   │   ├── 📂 svelte/
+│   │   ├── 📂 shared/
+│   │   ├── 📂 components/
 │   │   ├── 📂 composables/
-│   │   │   ├── useUltraTable.js
-│   │   │   ├── useAIAssistant.js
-│   │   │   └── useRealtime.js
 │   │   └── 📂 utils/
-│   │       └── helpers.js
 │   │
 │   └── 📂 css/
 │       ├── ultra.css
@@ -108,9 +149,13 @@ laravel-ultra/
 │   ├── 📂 Unit/
 │   │   ├── UltraTest.php
 │   │   ├── TableBuilderTest.php
+│   │   ├── EloquentTableBuilderTest.php      # NEW
+│   │   ├── RowActionTest.php                 # NEW
+│   │   ├── BulkActionTest.php                # NEW
 │   │   └── FormBuilderTest.php
 │   └── 📂 Feature/
 │       ├── TableTest.php
+│       ├── ModalTest.php                     # NEW
 │       └── FormTest.php
 
 └── 📂 docs/
@@ -118,4 +163,10 @@ laravel-ultra/
     ├── installation.md
     ├── table.md
     ├── form.md
-    └── modal.md
+    ├── modal.md
+    ├── eloquent-integration.md               # NEW
+    ├── row-actions.md                        # NEW
+    ├── bulk-actions.md                       # NEW
+    ├── views-bookmarks.md                    # NEW
+    ├── exporting.md                          # NEW
+    └── multiple-tables.md                    # NEW

@@ -2,6 +2,26 @@
 
 return [
 
+    'default_driver' => env('ULTRA_DRIVER', 'auto'), // auto, inertia, blade, json
+
+    'inertia' => [
+        'enabled' => env('ULTRA_INERTIA_ENABLED', true),
+        'components' => [
+            'table' => 'Ultra/Table',
+            'form' => 'Ultra/Form',
+            'modal' => 'Ultra/Modal',
+        ],
+    ],
+
+    'blade' => [
+        'enabled' => env('ULTRA_BLADE_ENABLED', true),
+        'components' => [
+            'table' => 'ultra::components.table',
+            'form' => 'ultra::components.form',
+            'modal' => 'ultra::components.modal',
+        ],
+    ],
+
     'ai' => [
         'enabled' => env('ULTRA_AI_ENABLED', false),
         'provider' => env('ULTRA_AI_PROVIDER', 'openai'),
